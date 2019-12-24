@@ -13,7 +13,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="id"
-                       constraintName="pk_waybill"
+                       constraintName="pk_product5"
                        tableName="PRODUCT5"
                        validate="true"/>
 
