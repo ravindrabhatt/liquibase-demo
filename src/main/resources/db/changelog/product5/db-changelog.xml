@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="authorName" id="product5-changelog-1.0">
+        <createTable tableName="PRODUCT5">
+            <column name="id" type="varchar(255)"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="type" type="${clob.type}"/>
+        </createTable>
+
+        <addPrimaryKey columnNames="id"
+                       constraintName="pk_waybill"
+                       tableName="PRODUCT5"
+                       validate="true"/>
+
+        <rollback>
+            <dropTable tableName="PRODUCT5"/>
+        </rollback>
+    </changeSet>
+
+
+    <changeSet author="authorName" id="product5-changelog-2.0">
+        <sql dbms="oracle"
+             endDelimiter="\nGO"
+             splitStatements="true"
+             stripComments="true">GRANT
+            SELECT,
+            INSERT,
+            UPDATE,
+            DELETE
+            ON
+            PRODUCT5
+            TO
+            USER;</sql>
+
+        <sql dbms="h2, oracle"
+             endDelimiter="\nGO"
+             splitStatements="true"
+             stripComments="true">GRANT
+            SELECT
+            ON
+            PRODUCT5
+            TO
+            SSELUSER;</sql>
+    </changeSet>
+
+
+    <changeSet author="authorName" id="product5-changelog-3.0">
+        <loadData encoding="UTF-8"
+                  file="load/product5.csv"
+                  quotchar="'"
+                  relativeToChangelogFile="true"
+                  separator=","
+                  tableName="PRODUCT5"
+                  usePreparedStatements="true">
+            <column name="id" type="varchar(255)"/>
+            <column name="name" type="varchar(255)"/>
+        </loadData>
+    </changeSet>
+
+<!--    <changeSet author="authorName" id="product5-changelog-4.0">-->
+<!--        <dropTable tableName="PRODUCT5"/>-->
+<!--    </changeSet>-->
+
+</databaseChangeLog>
