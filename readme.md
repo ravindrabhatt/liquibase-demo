@@ -10,6 +10,8 @@ drop database if exists pilot;
 
 create database pilot;
 
+use pilot;
+
 ##Build and execute the app
 mvn clean install
 
